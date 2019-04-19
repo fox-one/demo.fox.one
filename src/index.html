@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>  
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <title>Fox.ONE Demo Index</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB",Arial,sans-serif;
+    }
+    .mono {
+      font-family: Menlo, 'Courier New', Courier, monospace;
+    }
+    #app {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .title {
+      text-align: center;
+      opacity: 0.6;
+    }
+    .demo-title {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+      font-weight: normal;
+    }
+    .demo-text {
+      opacity: 0.6;
+    }
+    .box-card {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1 class="title">Fox.ONE Demo Index</h1>
+    <el-card class="box-card" v-for="demo in demoList">
+      <div slot="header" class="clearfix">
+        <h2 class="demo-title">{{demo.name}}</h2>
+        <div class="demo-text">{{demo.text}}</div class="text">
+      </div>
+      <el-row type="flex">
+        <el-button v-if="demo.intro_url" type="primary" plain size="small" @click="visit(demo.intro_url)">Introduction</el-button>
+        <el-button v-if="demo.doc_url" type="primary" plain size="small" @click="visit(demo.doc_url)">Document</el-button>
+        <el-button type="primary" plain size="small" @click="visit(demo.url)">Visit Demo</el-button>
+      </el-row>
+    </el-card>
+  </div>
+  <script>
+    var qrcode = null
+    var qrcodeEle = document.getElementById('qrcode');
+    new Vue({
+      el: '#app',
+      data: function() {
+        return {
+          demoList: [{
+              name: 'Exchange Admin Portal',
+              text: 'A demo admin portal of F1EX exchange. Manage your crypto-exchange.',
+              url: 'https://dev-admin.f1ex.io/',
+              intro_url: 'https://www.fox.one/en/products/exchange',
+            }, {
+              name: 'Payment Admin Portal',
+              text: 'A demo admin portal of Fox.ONE Payment system. Manage your business.',
+              url: 'https://demo-admin.pay.fox.one/',
+              doc_url: '',
+              intro_url: 'https://www.fox.one/en/products/payment',
+            }, {
+              name: 'Airdrop Demo',
+              text: 'A demo for Fox.ONE Airdrop system. Send tokens to your users as gift.',
+              url: 'https://demo.fox.one/airdrop/'
+            }
+          ]
+        }
+      },
+      mounted () {
+      },
+      methods: {
+        visit (url) {
+          window.location.href = url
+        }
+      }
+    })
+  </script>
+</body>
+</html>
